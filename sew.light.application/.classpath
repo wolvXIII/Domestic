@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry kind="con" path="org.apache.ivyde.eclipse.cpcontainer.IVYDE_CONTAINER/?project=sew.light.application&amp;ivyXmlPath=module.ivy&amp;confs=*"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/sew.light"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/sew.lifx"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/sew.philipshue"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
