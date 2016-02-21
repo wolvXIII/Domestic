@@ -6,5 +6,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/sew.light"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/sew.lifx"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/sew.philipshue"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/sew.util"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

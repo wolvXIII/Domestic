@@ -3,7 +3,5 @@
 sew.light.application.LightsListPage
 sew.light.application.LightPage
 sew.light.application.LightFontLoader
-java.util.concurrent.Executor
-sew.light.application.SimpleExecutor
 ej.bon.Timer
 

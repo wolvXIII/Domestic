@@ -1,15 +1,12 @@
 /*
  * Sébastien Eon 2016 / CC0-1.0
  */
-package sew.light.application;
+package sew.util;
 
 import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.concurrent.Executor;
 
-/**
- *
- */
 public class SimpleExecutor implements Executor {
 
 	private final Queue<Runnable> tasks;
