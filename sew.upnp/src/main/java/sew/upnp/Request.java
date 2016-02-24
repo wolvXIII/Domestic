@@ -3,19 +3,23 @@
  */
 package sew.upnp;
 
-class Request {
+public class Request {
 
 	private final StringBuilder builder;
 
-	Request(String type) {
+	public Request(String type) {
 		this.builder = new StringBuilder(type + " * HTTP/1.1\r\n");
 	}
 
-	void append(String key, String value) {
+	public void append(String key, String value) {
 		this.builder.append(key).append(": ").append(value).append("\r\n");
 	}
 
-	String getValue() {
+	public void appendData(String data) {
+		this.builder.append(data).append("\r\n");
+	}
+
+	public String getValue() {
 		this.builder.append("\r\n");
 		return this.builder.toString();
 	}
