@@ -25,6 +25,32 @@ public class SonosTest {
 		Iterator<SonosEntity> iterator = sonosDevices.iterator();
 		if (iterator.hasNext()) {
 			SonosEntity device = iterator.next();
+			printCurrentTrack(device);
+			// System.out.println("get position");
+			// device.getPosition();
+			// try {
+			// Thread.sleep(5000);
+			// } catch (InterruptedException e) {
+			// }
+			// System.out.println("seek");
+			// device.seek("00:02:30");
+			// try {
+			// Thread.sleep(5000);
+			// } catch (InterruptedException e) {
+			// }
+			// System.out.println("next");
+			// device.next();
+			// try {
+			// Thread.sleep(5000);
+			// } catch (InterruptedException e) {
+			// }
+			// printCurrentTrack(device);
+			// System.out.println("previous");
+			// device.previous();
+			// try {
+			// Thread.sleep(2000);
+			// } catch (InterruptedException e) {
+			// }
 			// System.out.println("pause");
 			// device.pause();
 			// try {
@@ -37,22 +63,41 @@ public class SonosTest {
 			// Thread.sleep(2000);
 			// } catch (InterruptedException e) {
 			// }
-			System.out.println("get volume " + device.getVolume());
-			System.out.println("volume up");
-			device.setVolume(device.getVolume() + 3);
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-			}
-			System.out.println("get volume " + device.getVolume());
-			System.out.println("volume down");
-			device.setVolume(device.getVolume() - 3);
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-			}
-			System.out.println("get volume " + device.getVolume());
+			// System.out.println("get volume " + device.getVolume());
+			// System.out.println("volume up");
+			// device.setVolume(device.getVolume() + 5);
+			// try {
+			// Thread.sleep(2000);
+			// } catch (InterruptedException e) {
+			// }
+			// System.out.println("get volume " + device.getVolume());
+			// System.out.println("volume down");
+			// device.setVolume(device.getVolume() - 5);
+			// try {
+			// Thread.sleep(2000);
+			// } catch (InterruptedException e) {
+			// }
+			// System.out.println("get mute " + device.isMute());
+			// System.out.println("mute");
+			// device.setMute(true);
+			// try {
+			// Thread.sleep(2000);
+			// } catch (InterruptedException e) {
+			// }
+			// System.out.println("get mute " + device.isMute());
+			// System.out.println("un mute");
+			// device.setMute(false);
+			// try {
+			// Thread.sleep(2000);
+			// } catch (InterruptedException e) {
+			// }
+			// System.out.println("get mute " + device.isMute());
 		}
+	}
+
+	private static void printCurrentTrack(SonosEntity device) {
+		System.out.println(device.getTrackArtist() + " \\ " + device.getTrackAlbum() + " \\ " + device.getTrackTitle()
+				+ " " + device.getTrackDuration());
 	}
 
 }
