@@ -23,5 +23,6 @@
 		<dependency org="ej.library.eclasspath" name="url" rev="[1.0.0-RC0,2.0.0-RC0[" />
 		<dependency org="ej.library.eclasspath" name="httpclient" rev="[1.0.0-RC0,2.0.0-RC0[" />
 		<dependency org="ej.library.eclasspath" name="executor" rev="[1.0.0-RC0,2.0.0-RC0[" />
+		<dependency org="org.json.me" name="json" rev="[1.0.0-RC0,2.0.0-RC0[" />
 	</dependencies>
 </ivy-module>

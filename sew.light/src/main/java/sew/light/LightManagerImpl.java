@@ -10,10 +10,12 @@ public class LightManagerImpl implements LightManager {
 
 	private final Collection<Light> lights;
 	private final Collection<LightsListener> lightsListeners;
+	private final Collection<MessageListener> messageListeners;
 
 	public LightManagerImpl() {
 		this.lights = new ArrayList<>();
 		this.lightsListeners = new ArrayList<>();
+		this.messageListeners = new ArrayList<>();
 	}
 
 	@Override
@@ -48,6 +50,30 @@ public class LightManagerImpl implements LightManager {
 	@Override
 	public Iterable<Light> getLights() {
 		return this.lights;
+	}
+
+	@Override
+	public void addMessageListener(MessageListener messageListener) {
+		this.messageListeners.add(messageListener);
+	}
+
+	@Override
+	public void removeMessageListener(MessageListener messageListener) {
+		this.messageListeners.remove(messageListener);
+	}
+
+	@Override
+	public void sendMessage(String message) {
+		for (MessageListener messageListener : this.messageListeners) {
+			messageListener.onNewMessage(message);
+		}
+	}
+
+	@Override
+	public void discardMessage(String message) {
+		for (MessageListener messageListener : this.messageListeners) {
+			messageListener.onDiscardMessage(message);
+		}
 	}
 
 }

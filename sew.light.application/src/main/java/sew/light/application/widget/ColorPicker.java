@@ -1,11 +1,12 @@
 /*
  * Sébastien Eon 2016 / CC0-1.0
  */
-package sew.light.application;
+package sew.light.application.widget;
 
 import ej.bon.XMath;
 import ej.microui.display.Colors;
 import ej.microui.display.GraphicsContext;
+import ej.microui.event.Event;
 import ej.microui.event.generator.Pointer;
 import ej.style.Style;
 import ej.style.container.Rectangle;
@@ -64,21 +65,37 @@ public class ColorPicker extends Image {
 	}
 
 	@Override
+	public boolean handleEvent(int event) {
+		if (Event.getType(event) == Event.POINTER) {
+			Pointer pointer = (Pointer) Event.getGenerator(event);
+			int pointerX = pointer.getX();
+			int pointerY = pointer.getY();
+			int action = Pointer.getAction(event);
+			switch (action) {
+			case Pointer.PRESSED:
+				return onPointerPressed(pointer, pointerX, pointerY, event);
+			case Pointer.RELEASED:
+				return onPointerReleased(pointer, pointerX, pointerY, event);
+			case Pointer.DRAGGED:
+				return onPointerDragged(pointer, pointerX, pointerY, event);
+			}
+		}
+		return super.handleEvent(event);
+	}
+
 	public boolean onPointerPressed(Pointer pointer, int pointerX, int pointerY, int event) {
 		updatePosition(pointerX, pointerY);
-		return super.onPointerPressed(pointer, pointerX, pointerY, event);
+		return false;
 	}
 
-	@Override
 	public boolean onPointerDragged(Pointer pointer, int pointerX, int pointerY, int event) {
 		updatePosition(pointerX, pointerY);
-		return super.onPointerDragged(pointer, pointerX, pointerY, event);
+		return true;
 	}
 
-	@Override
 	public boolean onPointerReleased(Pointer pointer, int pointerX, int pointerY, int event) {
 		updatePosition(pointerX, pointerY);
-		return super.onPointerReleased(pointer, pointerX, pointerY, event);
+		return true;
 	}
 
 	private void updatePosition(int x, int y) {

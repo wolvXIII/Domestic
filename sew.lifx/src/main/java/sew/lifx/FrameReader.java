@@ -104,7 +104,7 @@ public class FrameReader {
 			System.out.println("Received light state from " + address);
 			LightState lightState = new LightState(address, frameHeader, inputStream, payloadLength);
 			LIFXLight light = this.lifxManager.getLight(lightState.getLabel(), address);
-			light.simpleUpdate(lightState.getColor(), lightState.getKelvin());
+			light.simpleUpdate(lightState.getColor(), lightState.getKelvin(), lightState.getPower() == 65535);
 			break;
 
 		default:

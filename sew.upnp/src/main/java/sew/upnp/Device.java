@@ -281,6 +281,15 @@ public class Device {
 		return this.extra;
 	}
 
+	/**
+	 * Gets an extra property value.
+	 *
+	 * @return the extra property value or <code>null</code> if the property does not exist.
+	 */
+	public String getExtraProperty(String name) {
+		return this.extra.get(name);
+	}
+
 	public static String getTextContent(Node node) {
 		StringBuilder buffer = new StringBuilder();
 		for (int i = 0; i < node.getChildCount(); i++) {

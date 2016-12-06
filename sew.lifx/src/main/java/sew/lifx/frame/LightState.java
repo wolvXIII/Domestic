@@ -52,7 +52,7 @@ public class LightState implements LIFXFrame {
 		System.out.println("saturation=" + saturation);
 		System.out.println("value=" + value);
 		System.out.println("kelvin=" + this.kelvin);
-		// System.out.println("power=" + this.power);
+		System.out.println("power=" + this.power);
 		// System.out.println("label=" + this.label + " " + this.label.length());
 	}
 

@@ -1,7 +1,7 @@
 /*
  * Sébastien Eon 2016 / CC0-1.0
  */
-package sew.light.application;
+package sew.light.application.widget;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,14 +10,15 @@ import ej.bon.XMath;
 import ej.color.ColorHelper;
 import ej.color.LightHelper;
 import ej.microui.display.GraphicsContext;
+import ej.microui.event.Event;
 import ej.microui.event.generator.Pointer;
 import ej.style.Style;
 import ej.style.container.AlignmentHelper;
 import ej.style.container.Rectangle;
 import ej.style.util.StyleHelper;
 import ej.widget.basic.Image;
+import sew.light.application.util.ColorListener;
 import sew.light.util.Color;
-import sew.light.util.ColorListener;
 
 public class HuePicker extends Image {
 
@@ -30,6 +31,8 @@ public class HuePicker extends Image {
 		super(source);
 		this.cursor = cursor;
 		this.listeners = new ArrayList<>(1);
+
+		setEnabled(true);
 
 		// Assert source is square.
 		if (source.getWidth() != source.getHeight()) {
@@ -65,7 +68,7 @@ public class HuePicker extends Image {
 			this.hue = hue;
 
 			for (ColorListener hueListener : this.listeners) {
-				hueListener.onColorChanged(new Color(hue, 0.8f, 0.8f));
+				hueListener.onColorUpdate(new Color(hue, 0.8f, 0.8f));
 			}
 
 			repaint();
@@ -104,21 +107,37 @@ public class HuePicker extends Image {
 	}
 
 	@Override
-	public boolean onPointerPressed(Pointer pointer, int pointerX, int pointerY, int event) {
-		updatePosition(pointerX, pointerY);
-		return super.onPointerPressed(pointer, pointerX, pointerY, event);
+	public boolean handleEvent(int event) {
+		if (Event.getType(event) == Event.POINTER) {
+			Pointer pointer = (Pointer) Event.getGenerator(event);
+			int pointerX = pointer.getX();
+			int pointerY = pointer.getY();
+			int action = Pointer.getAction(event);
+			switch (action) {
+			case Pointer.PRESSED:
+				return onPointerPressed(pointer, pointerX, pointerY, event);
+			case Pointer.RELEASED:
+				return onPointerReleased(pointer, pointerX, pointerY, event);
+			case Pointer.DRAGGED:
+				return onPointerDragged(pointer, pointerX, pointerY, event);
+			}
+		}
+		return super.handleEvent(event);
 	}
 
-	@Override
-	public boolean onPointerDragged(Pointer pointer, int pointerX, int pointerY, int event) {
+	private boolean onPointerPressed(Pointer pointer, int pointerX, int pointerY, int event) {
 		updatePosition(pointerX, pointerY);
-		return super.onPointerDragged(pointer, pointerX, pointerY, event);
+		return false;
 	}
 
-	@Override
-	public boolean onPointerReleased(Pointer pointer, int pointerX, int pointerY, int event) {
+	private boolean onPointerDragged(Pointer pointer, int pointerX, int pointerY, int event) {
 		updatePosition(pointerX, pointerY);
-		return super.onPointerReleased(pointer, pointerX, pointerY, event);
+		return true;
+	}
+
+	private boolean onPointerReleased(Pointer pointer, int pointerX, int pointerY, int event) {
+		updatePosition(pointerX, pointerY);
+		return true;
 	}
 
 	private void updatePosition(int x, int y) {

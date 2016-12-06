@@ -24,27 +24,30 @@ public class PhilipsHueLight extends DefaultLight {
 		super.setIntensity(MAX_INTENSITY);
 	}
 
-	void simpleUpdate(Color color, int intensity) {
+	void simpleUpdate(Color color, int intensity, boolean on) {
 		super.setColor(color);
 		super.setIntensity(intensity);
+		super.setOn(on);
 	}
 
-	@Override
-	public void update(Color color, int intensity) {
-		// if (!color.equals(getColor()) || intensity != getIntensity()) {
-		super.update(color, intensity);
-		requestUpdateOnDevice();
-		// }
-	}
+	// @Override
+	// public void update(Color color, int intensity) {
+	// // if (!color.equals(getColor()) || intensity != getIntensity()) {
+	// super.update(color, intensity);
+	// requestUpdateOnDevice();
+	// // }
+	// }
 
 	@Override
 	public void setColor(Color color) {
 		// if (!color.equals(getColor())) {
+		System.out.println("PhilipsHueLight.setColor()");
 		super.setColor(color);
 		requestUpdateOnDevice();
 	}
 
 	private void requestUpdateOnDevice() {
+		System.out.println("PhilipsHueLight.requestUpdateOnDevice() " + this.dirty);
 		if (this.dirty) {
 			return;
 		}
@@ -61,8 +64,10 @@ public class PhilipsHueLight extends DefaultLight {
 
 	private void updateOnDevice() {
 		try {
+			System.out.println("PhilipsHueLight.updateOnDevice()");
 			this.dirty = false;
-			this.manager.updateLightColor(this.id, getColor());
+			this.manager.updateLight(this.id, isOn(), getColor());
+			// TODO update intensity?
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -71,6 +76,13 @@ public class PhilipsHueLight extends DefaultLight {
 	@Override
 	public void setIntensity(int intensity) {
 		super.setIntensity(intensity);
+		requestUpdateOnDevice();
+	}
+
+	@Override
+	public void setOn(boolean on) {
+		super.setOn(on);
+		requestUpdateOnDevice();
 	}
 
 }

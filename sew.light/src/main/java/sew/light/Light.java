@@ -4,7 +4,6 @@
 package sew.light;
 
 import sew.light.util.Color;
-import sew.light.util.ColorListener;
 
 public interface Light {
 
@@ -17,19 +16,21 @@ public interface Light {
 	 */
 	String getName();
 
-	void addColorListener(ColorListener listener);
+	void addListener(LightListener listener);
 
-	void removeColorListener(ColorListener listener);
+	void removeListener(LightListener listener);
 
-	/**
-	 * Sets the color and intensity.
-	 *
-	 * @param color
-	 *            the color to set.
-	 * @param intensity
-	 *            the intensity to set.
-	 */
-	void update(Color color, int intensity);
+	// /**
+	// * Sets the color and intensity.
+	// *
+	// * @param on
+	// * <code>true</code> if the light is on, <code>false</code> otherwise.
+	// * @param color
+	// * the color to set.
+	// * @param intensity
+	// * the intensity to set.
+	// */
+	// void update(boolean on, Color color, int intensity);
 
 	/**
 	 * Sets the color.
@@ -60,5 +61,20 @@ public interface Light {
 	 * @return the intensity.
 	 */
 	int getIntensity();
+
+	/**
+	 * Gets whether the light is on or off.
+	 *
+	 * @return <code>true</code> if the light is on, <code>false</code> otherwise.
+	 */
+	boolean isOn();
+
+	/**
+	 * Turns on or off the light.
+	 *
+	 * @param on
+	 *            <code>true</code> to turn on the light, <code>false</code> otherwise.
+	 */
+	void setOn(boolean on);
 
 }

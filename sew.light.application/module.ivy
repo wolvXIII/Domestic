@@ -27,6 +27,9 @@
 		<dependency org="ej.library.eclasspath" name="url" rev="[1.0.0-RC0,2.0.0-RC0[" />
 		<dependency org="ej.library.eclasspath" name="httpclient" rev="[1.0.0-RC0,2.0.0-RC0[" />
 		<dependency org="ej.library.eclasspath" name="executor" rev="[1.0.0-RC0,2.0.0-RC0[" />
+		<dependency org="ej.library.ui" name="motion" rev="[3.0.0-a,4.0.0-RC0[" />
+		<!--
 		<dependency org="ej.library.ui" name="widget" rev="[2.0.0-a,3.0.0-RC0[" />
+		-->
 	</dependencies>
 </ivy-module>

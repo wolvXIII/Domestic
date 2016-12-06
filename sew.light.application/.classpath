@@ -2,6 +2,14 @@
 <classpath>
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry kind="lib" path="/ej.animation/bin"/>
+	<classpathentry kind="lib" path="/ej.color/bin"/>
+<!-- 	<classpathentry kind="src" path="/ej.style/src"/> -->
+<!-- 	<classpathentry kind="src" path="/ej.widget/src"/> -->
+	<classpathentry kind="lib" path="/ej.style/bin" sourcepath="/ej.style/src"/>
+	<classpathentry kind="lib" path="/ej.widget/bin" sourcepath="/ej.widget/src"/>
+	<classpathentry kind="lib" path="/ej.widget.container/bin" sourcepath="/ej.widget.container/src"/>
+	<classpathentry kind="lib" path="/ej.widget.navigation/bin"/>
 	<classpathentry kind="con" path="org.apache.ivyde.eclipse.cpcontainer.IVYDE_CONTAINER/?project=sew.light.application&amp;ivyXmlPath=module.ivy&amp;confs=*"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/sew.light"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/sew.lifx"/>

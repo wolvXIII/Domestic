@@ -7,19 +7,19 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import sew.light.util.Color;
-import sew.light.util.ColorListener;
 
 public class DefaultLight implements Light {
 
 	private final String name;
-	private final Collection<ColorListener> listeners;
+	private final Collection<LightListener> listeners;
 	private Color color;
 	private int intensity;
+	private boolean on;
 
 	public DefaultLight(String name) {
 		this.name = name;
 		this.listeners = new ArrayList<>();
-		this.color = new Color(0f, 0f, 0f);
+		this.color = new Color(0f, 1f, 1f);
 	}
 
 	@Override
@@ -28,26 +28,27 @@ public class DefaultLight implements Light {
 	}
 
 	@Override
-	public void addColorListener(ColorListener listener) {
+	public void addListener(LightListener listener) {
 		this.listeners.add(listener);
 	}
 
 	@Override
-	public void removeColorListener(ColorListener listener) {
+	public void removeListener(LightListener listener) {
 		this.listeners.remove(listener);
 	}
 
-	@Override
-	public void update(Color color, int intensity) {
-		setColor(color);
-		setIntensity(intensity);
-	}
+	// @Override
+	// public void update(boolean on, Color color, int intensity) {
+	//
+	// setColor(color);
+	// setIntensity(intensity);
+	// }
 
 	@Override
 	public void setColor(Color color) {
 		this.color = color;
-		for (ColorListener colorListener : this.listeners) {
-			colorListener.onColorChanged(color);
+		for (LightListener colorListener : this.listeners) {
+			colorListener.onLightUpdate(this);
 		}
 	}
 
@@ -64,6 +65,16 @@ public class DefaultLight implements Light {
 	@Override
 	public int getIntensity() {
 		return this.intensity;
+	}
+
+	@Override
+	public boolean isOn() {
+		return this.on;
+	}
+
+	@Override
+	public void setOn(boolean on) {
+		this.on = on;
 	}
 
 }

@@ -15,4 +15,12 @@ public interface LightManager {
 
 	Iterable<Light> getLights();
 
+	void addMessageListener(MessageListener messageListener);
+
+	void removeMessageListener(MessageListener messageListener);
+
+	void sendMessage(String message);
+
+	void discardMessage(String message);
+
 }

@@ -1,38 +1,40 @@
 /*
  * Sébastien Eon 2016 / CC0-1.0
  */
-package sew.light.application;
+package sew.light.application.page;
 
 import java.io.IOException;
 
-import ej.container.List;
-import ej.container.OppositeBars;
 import ej.microui.display.Image;
-import ej.mwt.MWT;
-import ej.navigation.page.Page;
 import ej.widget.basic.Label;
+import ej.widget.container.List;
+import ej.widget.container.SimpleDock;
+import ej.widget.navigation.page.Page;
 import sew.light.Light;
+import sew.light.LightListener;
+import sew.light.application.style.ClassSelectors;
+import sew.light.application.util.ColorListener;
+import sew.light.application.widget.HuePicker;
 import sew.light.util.Color;
-import sew.light.util.ColorListener;
 
-public class LightPage extends Page implements ColorListener {
+public class LightPage extends Page implements LightListener {
 
 	private final Label title;
 	private Light light;
 	private final HuePicker huePicker;
 
 	public LightPage() {
-		OppositeBars borderComposite = new OppositeBars(false);
+		SimpleDock borderComposite = new SimpleDock(false);
 
 		this.title = new Label();
 		this.title.addClassSelector(ClassSelectors.TITLE);
 
-		borderComposite.add(this.title, MWT.NORTH);
+		borderComposite.setFirst(this.title);
 
 		List list = new List(true);
 		this.huePicker = createHuePicker();
 		list.add(this.huePicker);
-		borderComposite.add(list, MWT.CENTER);
+		borderComposite.setCenter(list);
 
 		setWidget(borderComposite);
 	}
@@ -44,8 +46,9 @@ public class LightPage extends Page implements ColorListener {
 
 			HuePicker huePicker = new HuePicker(colorPickerImage, colorPickerCursorImage);
 			huePicker.addHueListener(new ColorListener() {
+
 				@Override
-				public void onColorChanged(Color color) {
+				public void onColorUpdate(Color color) {
 					LightPage.this.light.setColor(color);
 				}
 			});
@@ -59,13 +62,13 @@ public class LightPage extends Page implements ColorListener {
 	@Override
 	public void showNotify() {
 		super.showNotify();
-		this.light.addColorListener(this);
+		this.light.addListener(this);
 	}
 
 	@Override
 	public void hideNotify() {
 		super.hideNotify();
-		this.light.removeColorListener(this);
+		this.light.removeListener(this);
 	}
 
 	public void setLight(Light light) {
@@ -75,8 +78,8 @@ public class LightPage extends Page implements ColorListener {
 	}
 
 	@Override
-	public void onColorChanged(Color color) {
-		this.huePicker.setHue(color.getHue());
+	public void onLightUpdate(Light light) {
+		this.huePicker.setHue(light.getColor().getHue());
 	}
 
 }

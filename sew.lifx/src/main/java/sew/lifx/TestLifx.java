@@ -28,7 +28,7 @@ public class TestLifx {
 
 		Collection<LIFXLight> lights = lifxManager.getLights();
 		for (Light light : lights) {
-			light.update(new Color((float) Math.random(), 1.0f, 1.0f), Light.MAX_INTENSITY);
+			light.setColor(new Color((float) Math.random(), 1.0f, 1.0f));
 		}
 		// InetAddress address = InetAddress.getByName("192.168.0.255");
 		// final DatagramSocket socket = new DatagramSocket(PORT);

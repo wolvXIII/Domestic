@@ -22,17 +22,18 @@ public class LIFXLight extends DefaultLight {
 		super.setIntensity(MAX_INTENSITY / 2);
 	}
 
-	void simpleUpdate(Color color, int intensity) {
+	void simpleUpdate(Color color, int intensity, boolean on) {
 		super.setColor(color);
 		super.setIntensity(intensity);
+		super.setOn(on);
 	}
 
-	@Override
-	public void update(Color color, int intensity) {
-		super.update(color, intensity);
-		this.manager.getFrameSender().send(this.address, LIFXManager.PORT,
-				new LightSetColor(color, intensity, DURATION));
-	}
+	// @Override
+	// public void update(Color color, int intensity) {
+	// super.update(color, intensity);
+	// this.manager.getFrameSender().send(this.address, LIFXManager.PORT,
+	// new LightSetColor(color, intensity, DURATION));
+	// }
 
 	@Override
 	public void setColor(Color color) {
